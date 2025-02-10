@@ -1,0 +1,17 @@
+arquitectura: starting, register, login, email, password, verification, user.
+
+foto
+nombre
+email
+biografia
+
+intercambios completados, puntuacion, verificacion
+
+articulos publicados
+
+favoritos
+
+Actulizar informacion
+Cambiar contraseña
+Verificate
+
