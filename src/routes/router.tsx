@@ -1,29 +1,30 @@
 import { createBrowserRouter } from "react-router-dom";
-import Starting from "../1starting/starting";
-import Register from "../2register/register";
-import Login from "../3login/login";
-import Email from "../4email/email";
-import Password from "../5password/password";
-import Verification from "../6verification/verification";
-import NotFound from "../components/tsx/notFound";
-import User from "../components/tsx/user";
-import Explorador from "../7explorador/Explorador";
-import Articulos from "../8articulos/Articulos";
-import Favorito from "../9favorito/Favorito";
-import Intercambios from "../11Intercambios/Intercambios";
-import Cuentas from "../12cuentas/Cuentas";
-import Chats from "../10chats/Chats";
-import UserAdmin from "../components/tsx/userAdmin";
-import Category from "../13category/Category";
-import CuentasUser from "../12cuentas/CuentasUser";
+import Explorador from "../view/explorador/Explorador";
+import Login from "../view/login/login";
 import AuthGuard from "../guards/guards";
-import Messenger from "../14messenger/Messenger";
-import ChatsUser from "../15chatUser/ChatUser";
+import Register from "../view/register/register";
+import User from "../components/tsx/user";
+import Articulos from "../view/articulo/Articulos";
+import Favorito from "../view/favorito/Favorito";
+import Intercambios from "../view/intercambios/Intercambios";
+import Cuentas from "../view/cuentas/Cuentas";
+import Chats from "../view/chat/Chats";
+import UserAdmin from "../components/tsx/userAdmin";
+import Category from "../view/category/Category";
+import CuentasUser from "../view/cuentasAdmin/CuentasUser";
+import Messenger from "../view/messeger/Messenger";
+import ChatsUser from "../view/chatAdmin/ChatUser";
+import NotFound from "../components/tsx/notFound";
+import Email from "../view/email/email";
+import Password from "../view/password/password";
+import Verification from "../view/verification/verification";
+
 
 const router = createBrowserRouter([
-  { path: "/", element: <Starting /> },
-  { path: "/register", element: <Register /> },
+  { path: "/", element: <Explorador /> },
   { path: "/login", element: <Login /> },
+  { path: "/authguard", element: <AuthGuard /> },
+  { path: "/register", element: <Register /> },
   { path: "/email", element: <Email /> },
   { path: "/password", element: <Password /> },
   { path: "/verification", element: <Verification /> },
@@ -31,7 +32,6 @@ const router = createBrowserRouter([
     path: "/",
     element: <User />,
     children: [
-      { path: "/explorar", element: <Explorador /> },
       { path: "/articulos", element: <Articulos /> },
       { path: "/favoritos", element: <Favorito /> },
       { path: "/Chats", element: <Chats /> },
@@ -51,7 +51,6 @@ const router = createBrowserRouter([
     ]
   },
 
-  { path: "/authguard", element: <AuthGuard /> },
   { path: "*", element: <NotFound /> }
 ]);
 

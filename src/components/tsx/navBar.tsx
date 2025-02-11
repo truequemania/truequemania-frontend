@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { io, Socket } from "socket.io-client";
 import { linkBackend } from "../ts/urls";
-import logoImage from "../../assets/logo.png";
+import logoImage from "../../assets/img/logo.png";
 
 let socket: Socket | null = null;
 

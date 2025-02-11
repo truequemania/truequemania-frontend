@@ -20,12 +20,8 @@ export const AuthGuard = () => {
     }
 
     try {
-      // Extraer y decodificar el payload del JWT
       const payloadBase64 = accessToken.split(".")[1];
       const decodedPayload: User = JSON.parse(atob(payloadBase64));
-
-      console.log("Decoded Token Payload:", decodedPayload); // 📌 Ver todo el payload
-      console.log("User Role:", decodedPayload.role); // 📌 Ver el role
 
       setUser(decodedPayload);
     } catch (error) {
@@ -37,13 +33,9 @@ export const AuthGuard = () => {
   useEffect(() => {
     if (user && !isRedirected) {
       const redirectRoutes: Record<string, string> = {
-        "client": "/explorar",
+        "client": "/",
         "admin": "/categoriasUser",
       };
-
-      if (user.role) {
-        console.log("Redirecting user with role:", user.role); // 📌 Ver el role antes de redirigir
-      }
 
       if (user.role && redirectRoutes[user.role]) {
         setIsRedirected(true);
