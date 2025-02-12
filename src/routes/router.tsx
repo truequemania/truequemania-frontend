@@ -18,6 +18,14 @@ import NotFound from "../components/tsx/notFound";
 import Email from "../view/email/email";
 import Password from "../view/password/password";
 import Verification from "../view/verification/verification";
+import History from "../view/history/history";
+import Blog from "../view/blog/blog";
+import Contact from "../view/contact/contact";
+import Faq from "../view/faq/faq";
+import ReturnsPolicy from "../view/returns/returns";
+import PaymentMethods from "../view/payments/payments";
+import TermsAndConditions from "../view/terms/terms";
+import PrivacyPolicy from "../view/privacy/privacy";
 
 
 const router = createBrowserRouter([
@@ -28,6 +36,7 @@ const router = createBrowserRouter([
   { path: "/email", element: <Email /> },
   { path: "/password", element: <Password /> },
   { path: "/verification", element: <Verification /> },
+
   {
     path: "/",
     element: <User />,
@@ -36,7 +45,7 @@ const router = createBrowserRouter([
       { path: "/favoritos", element: <Favorito /> },
       { path: "/Chats", element: <Chats /> },
       { path: "/intercambios", element: <Intercambios /> },
-      { path:"/cuentas/:id", element: <Cuentas /> },
+      { path: "/cuentas/:id", element: <Cuentas /> },
       { path: "/messenger", element: <Messenger /> }
     ]
   },
@@ -50,6 +59,16 @@ const router = createBrowserRouter([
       { path: "/chatsUser", element: <ChatsUser /> },
     ]
   },
+
+  // Rutas footer
+  { path: "/history", element: <History /> },
+  { path: "/blog", element: <Blog /> },
+  { path: "/contact", element: <Contact /> },
+  { path: "/faq", element: <Faq /> },
+  { path: "/returns", element: <ReturnsPolicy /> },
+  { path: "/payments", element: <PaymentMethods /> },
+  { path: "/terms", element: <TermsAndConditions /> },
+  { path: "/privacy", element: <PrivacyPolicy /> },
 
   { path: "*", element: <NotFound /> }
 ]);

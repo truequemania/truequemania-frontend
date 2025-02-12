@@ -36,9 +36,9 @@ function Footer() {
                     <div>
                         <h2 className="mb-4 text-lg font-semibold">Atención al Cliente</h2>
                         <ul className="text-gray-400">
-                            <li><a href="/faqs" className="hover:underline hover:text-gray-500">Preguntas Frecuentes</a></li>
+                            <li><a href="/faq" className="hover:underline hover:text-gray-500">Preguntas Frecuentes</a></li>
                             <li><a href="/returns" className="hover:underline hover:text-gray-500">Devoluciones</a></li>
-                            <li><a href="/payment" className="hover:underline hover:text-gray-500">Métodos de Pago</a></li>
+                            <li><a href="/payments" className="hover:underline hover:text-gray-500">Métodos de Pago</a></li>
                         </ul>
                     </div>
 
@@ -57,19 +57,17 @@ function Footer() {
                     <div>
                         <h2 className="mb-4 text-lg font-semibold">Mi Cuenta</h2>
                         <ul className="text-gray-400">
-                            <li><a href="/orders" className="hover:underline hover:text-gray-500">Mis Pedidos</a></li>
-                            <li><a href="/follow-up" className="hover:underline hover:text-gray-500">Seguimiento de Envío</a></li>
-                            <li><a href="/favorite" className="hover:underline hover:text-gray-500">Lista de Deseos</a></li>
+                            <li><a href="/" className="hover:underline hover:text-gray-500">Mis Pedidos</a></li>
+                            <li><a href="/" className="hover:underline hover:text-gray-500">Seguimiento de Envío</a></li>
+                            <li><a href="/" className="hover:underline hover:text-gray-500">Lista de Deseos</a></li>
                         </ul>
                     </div>
 
                     <div>
                         <h2 className="mb-4 text-lg font-semibold">Síguenos</h2>
                         <div className="flex space-x-4">
-                            <a target='_blank' href="https://facebook.com/" className="hover:text-gray-500">Facebook</a>
-                            <a target='_blank' href="https://instagram.com" className="hover:text-gray-500">Instagram</a>
-                            <a target='_blank' href="https://x.com" className="hover:text-gray-500">X</a>
-                            <a target='_blank' href="https://youtube.com" className="hover:text-gray-500">YouTube</a>
+                            <a target='_blank' href="https://x.com/Truequemania1" className="hover:text-gray-500">X/Twitter</a>
+                            <a target='_blank' href="https://www.youtube.com/@Truequemania" className="hover:text-gray-500">YouTube</a>
                         </div>
                     </div>
 
@@ -81,7 +79,7 @@ function Footer() {
                             placeholder="Tu correo"
                             className="mt-2 p-2 w-full rounded border border-gray-700 bg-gray-800 text-white"
                         />
-                        <button className="mt-2 px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700">
+                        <button className="mt-2 px-4 py-2 bg-orange-400 text-white rounded hover:bg-orange-500">
                             Suscribirse
                         </button>
                     </div>
@@ -102,8 +100,8 @@ function Footer() {
                     <div>
                         <h2 className="mb-4 text-lg font-semibold">Descarga Nuestra App</h2>
                         <div className="flex space-x-4">
-                            <img src={appStore} alt="App Store" className="h-10" />
-                            <img src={googlePlay} alt="Google Play" className="h-10" />
+                            <a target='_blank' href="https://apps.apple.com/app/idtruequemania"><img src={appStore} alt="App Store" className="h-10" /></a>
+                            <a target='_blank' href="https://play.google.com/store/apps/details?id=truequemania&pli=1"><img src={googlePlay} alt="Google Play" className="h-10" /></a>
                         </div>
                     </div>
                 </div>

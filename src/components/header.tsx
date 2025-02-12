@@ -15,7 +15,7 @@ function Header() {
                 </Link>
 
                 <div className="hidden md:block">
-                    <Link to="/login" className="px-4 py-2 bg-orange-600 hover:bg-orange-700 rounded-lg text-white">
+                    <Link to="/login" className="px-4 py-2 bg-orange-400 hover:bg-orange-500 rounded-lg text-white">
                         Empezar
                     </Link>
                 </div>
@@ -30,7 +30,7 @@ function Header() {
 
             {menuOpen && (
                 <div className="md:hidden bg-gray-800 text-white space-y-4 p-4">
-                    <Link to="/login" className="block bg-orange-600 hover:bg-orange-700 text-center py-2 rounded-lg">
+                    <Link to="/login" className="block bg-orange-400 hover:bg-orange-500 text-center py-2 rounded-lg">
                         Empezar
                     </Link>
                 </div>
