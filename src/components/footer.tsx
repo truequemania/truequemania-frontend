@@ -4,8 +4,19 @@ import visa from '../assets/img/visa.png';
 import mastercard from '../assets/img/mastercard.png';
 import appStore from '../assets/img/appstore.png';
 import googlePlay from '../assets/img/playstore.png';
+import Message from './tsx/message';
+import { useState } from 'react';
+import { HandleSuscribe } from '../validation/suscribe/handle';
 
 function Footer() {
+
+    const [email, setEmail] = useState("");
+
+    const { handleSubmitSuscribe, isLoading } = HandleSuscribe(
+        email,
+        setEmail
+    );
+
     return (
         <footer className="font-quicksand bg-gray-900 text-white">
             <div className="mx-auto w-full max-w-screen-xl p-6 lg:py-10">
@@ -72,16 +83,23 @@ function Footer() {
                     </div>
 
                     <div>
-                        <h2 className="mb-4 text-lg font-semibold">Suscríbete</h2>
-                        <p className="text-gray-400">Recibe ofertas exclusivas y novedades.</p>
-                        <input
-                            type="email"
-                            placeholder="Tu correo"
-                            className="mt-2 p-2 w-full rounded border border-gray-700 bg-gray-800 text-white"
-                        />
-                        <button className="mt-2 px-4 py-2 bg-orange-400 text-white rounded hover:bg-orange-500">
-                            Suscribirse
-                        </button>
+                        <p id="errSuscribe" className="err hidden text-red-500 text-sm font-medium rounded-lg text-center"></p>
+                        <p id="successSuscribe" className="success hidden text-green-500 text-sm font-medium rounded-lg text-center"></p>
+                        <form onSubmit={handleSubmitSuscribe}>
+                            <h2 className="mb-4 text-lg font-semibold">Suscríbete</h2>
+                            <p className="text-gray-400">Recibe ofertas exclusivas y novedades.</p>
+                            <input
+                                type="email"
+                                placeholder="Tu correo"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="mt-2 p-2 w-full rounded border border-gray-700 bg-gray-800 text-white"
+                            />
+                            <button type='submit' className="mt-2 px-4 py-2 bg-orange-400 text-white rounded hover:bg-orange-500" disabled={isLoading}
+                            >
+                                {isLoading ? "Suscribiendo ..." : "Suscribirme"}
+                            </button>
+                        </form>
                     </div>
                 </div>
 
