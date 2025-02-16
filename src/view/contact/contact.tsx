@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import Header from "../../components/header";
-import HeaderSesion from "../../components/headerSesion";
+import Header from "../../components/home/header";
+import HeaderSesion from "../../components/home/headerSesion";
 import WhatsAppFloatingButton from "../../components/tsx/whatsapp";
-import Footer from "../../components/footer";
 import Message from "../../components/tsx/message";
 import { Handle } from "../../validation/contact/handle";
+import Footer from "../../components/home/footer";
 
 function Contact() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);

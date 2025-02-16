@@ -1,6 +1,6 @@
 interface User {
   email: string;
-  role: "client" | "admin";
+  user: "client" | "admin";
 }
 
 const roleClient = (navigate: (path: string) => void) => {
@@ -14,9 +14,8 @@ const roleClient = (navigate: (path: string) => void) => {
   try {
     const payloadBase64 = accessToken.split(".")[1];
     const decodedPayload: User = JSON.parse(atob(payloadBase64));
-
-    if (decodedPayload.role === "client") {
-      navigate("/explorar");
+    if (decodedPayload.user === "client") {
+      navigate("/");
     }
   } catch (error) {
     console.error("Error al decodificar el token:", error);

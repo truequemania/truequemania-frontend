@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import HeaderSesion from "../../components/headerSesion";
-import Header from "../../components/header";
+import HeaderSesion from "../../components/home/headerSesion";
+import Header from "../../components/home/header";
 import WhatsAppFloatingButton from "../../components/tsx/whatsapp";
-import Footer from "../../components/footer";
+import Footer from "../../components/home/footer";
 
 function ReturnsPolicy() {
     const [openIndex, setOpenIndex] = useState(null);

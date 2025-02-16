@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 interface User {
   email: string;
-  role: "client" | "admin"; 
+  user: "client" | "admin"; 
 }
 
 export const AuthGuard = () => {
@@ -24,6 +24,8 @@ export const AuthGuard = () => {
       const decodedPayload: User = JSON.parse(atob(payloadBase64));
 
       setUser(decodedPayload);
+      console.log("User email:", decodedPayload);
+      console.log("User role:", decodedPayload.user);
     } catch (error) {
       console.error("Error decodificando el token:", error);
       navigate("/login");
@@ -34,12 +36,12 @@ export const AuthGuard = () => {
     if (user && !isRedirected) {
       const redirectRoutes: Record<string, string> = {
         "client": "/",
-        "admin": "/categoriasUser",
+        "admin": "/home-admin",
       };
 
-      if (user.role && redirectRoutes[user.role]) {
+      if (user.user && redirectRoutes[user.user]) {
         setIsRedirected(true);
-        navigate(redirectRoutes[user.role]);
+        navigate(redirectRoutes[user.user]);
       }
     }
   }, [user, isRedirected, navigate]);

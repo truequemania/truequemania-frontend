@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import WhatsAppFloatingButton from "../../components/tsx/whatsapp";
-import Footer from "../../components/footer";
-import HeaderSesion from "../../components/headerSesion";
-import Header from "../../components/header";
+import HeaderSesion from "../../components/home/headerSesion";
+import Header from "../../components/home/header";
+import Footer from "../../components/home/footer";
 
 function TermsAndConditions() {
     const [openIndex, setOpenIndex] = useState(null);

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import Header from "../../components/header";
-import HeaderSesion from "../../components/headerSesion";
+import Header from "../../components/home/header";
+import HeaderSesion from "../../components/home/headerSesion";
 import WhatsAppFloatingButton from "../../components/tsx/whatsapp";
-import Footer from "../../components/footer";
+import Footer from "../../components/home/footer";
 
 function History() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);

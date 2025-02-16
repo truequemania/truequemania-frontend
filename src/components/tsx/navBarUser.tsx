@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logoImage from "../../assets/logo.png";
+import logoImage from "../../assets/img/logo.png";
 
 interface NavBarProps {
     toggleAside: () => void;

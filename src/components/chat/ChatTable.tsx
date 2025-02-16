@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
-import { linkBackend, linkFrontend } from "../ts/urls";
-import { handleGetUserId } from "../../validation/chat/handleGet";
+import { linkBackend, linkFrontend } from "../../ts/urls";
+import { handleGetUserId } from "../../../validation/chat/handleGet";
 import ChatForm from "./ChatForm";
-import { handleGetUserIntercambios } from "../../validation/intercambios/handleGet";
+import { handleGetUserIntercambios } from "../../../validation/intercambios/handleGet";
 
 type Chat = {
   id: number;

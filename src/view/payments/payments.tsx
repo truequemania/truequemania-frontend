@@ -3,9 +3,9 @@ import visa from "../../assets/img/visa.png";
 import mastercard from "../../assets/img/mastercard.png";
 import paypal from "../../assets/img/paypal.png";
 import WhatsAppFloatingButton from "../../components/tsx/whatsapp";
-import Footer from "../../components/footer";
-import HeaderSesion from "../../components/headerSesion";
-import Header from "../../components/header";
+import HeaderSesion from "../../components/home/headerSesion";
+import Header from "../../components/home/header";
+import Footer from "../../components/home/footer";
 
 function PaymentMethods() {
     const [openIndex, setOpenIndex] = useState(null);

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Message from "../tsx/message";
-import Handle from "../../validation/chat/handle";
-import { handleDelete } from "../../validation/chat/handleDelete";
+import Message from "../../tsx/message";
+import Handle from "../../../validation/chat/handle";
+import { handleDelete } from "../../../validation/chat/handleDelete";
 
 function ChatForm({
   toggleModal,

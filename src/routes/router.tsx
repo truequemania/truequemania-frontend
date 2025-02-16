@@ -1,23 +1,32 @@
 import { createBrowserRouter } from "react-router-dom";
-import Explorador from "../view/explorador/Explorador";
+
+// Archivos principio y fin
+import Home from "../view/home/home"; 
+import NotFound from "../components/tsx/notFound";
+
+// Archivos auth
 import Login from "../view/login/login";
 import AuthGuard from "../guards/guards";
 import Register from "../view/register/register";
-import User from "../components/tsx/user";
-import Articulos from "../view/articulo/Articulos";
-import Favorito from "../view/favorito/Favorito";
-import Intercambios from "../view/intercambios/Intercambios";
-import Cuentas from "../view/cuentas/Cuentas";
-import Chats from "../view/chat/Chats";
-import UserAdmin from "../components/tsx/userAdmin";
-import Category from "../view/category/Category";
-import CuentasUser from "../view/cuentasAdmin/CuentasUser";
-import Messenger from "../view/messeger/Messenger";
-import ChatsUser from "../view/chatAdmin/ChatUser";
-import NotFound from "../components/tsx/notFound";
 import Email from "../view/email/email";
 import Password from "../view/password/password";
 import Verification from "../view/verification/verification";
+
+// Archivos admin
+import Admin from "../components/admin/admin";
+import HomeAdmin from "../view/admin/home/homeAdmin";
+import CategoryAdmin from "../view/admin/category/categoryAdmin";
+import ChatsAdmin from "../view/admin/chat/chatAdmin";
+
+// Archivos client
+import Client from "../components/client/client";
+import Article from "../view/client/article/article";
+import Favorite from "../view/client/favorite/favorite";
+import Exchange from "../view/client/exchange/exchange";
+import Chats from "../view/client/chat/chats";
+import Messenger from "../view/client/messeger/Messenger";
+
+// Archivos footer
 import History from "../view/history/history";
 import Blog from "../view/blog/blog";
 import Contact from "../view/contact/contact";
@@ -26,37 +35,44 @@ import ReturnsPolicy from "../view/returns/returns";
 import PaymentMethods from "../view/payments/payments";
 import TermsAndConditions from "../view/terms/terms";
 import PrivacyPolicy from "../view/privacy/privacy";
-
+import Accounts from "../view/client/accounts/accounts";
 
 const router = createBrowserRouter([
-  { path: "/", element: <Explorador /> },
+
+  // rutas principio y fin
+  { path: "/", element: <Home /> },
+  { path: "*", element: <NotFound /> },
+
+  // rutas auht
   { path: "/login", element: <Login /> },
-  { path: "/authguard", element: <AuthGuard /> },
   { path: "/register", element: <Register /> },
+  { path: "/authguard", element: <AuthGuard /> },
   { path: "/email", element: <Email /> },
   { path: "/password", element: <Password /> },
   { path: "/verification", element: <Verification /> },
 
+  // Rutas del cliente
   {
     path: "/",
-    element: <User />,
+    element: <Client />,
     children: [
-      { path: "/articulos", element: <Articulos /> },
-      { path: "/favoritos", element: <Favorito /> },
-      { path: "/Chats", element: <Chats /> },
-      { path: "/intercambios", element: <Intercambios /> },
-      { path: "/cuentas/:id", element: <Cuentas /> },
-      { path: "/messenger", element: <Messenger /> }
+      { path: "/article", element: <Article /> },
+      // { path: "/favorite", element: <Favorite /> },
+      // { path: "/chat", element: <Chats /> },
+      // { path: "/exchange", element: <Exchange /> },
+      // { path: "/accounts/:id", element: <Accounts /> },
+      // { path: "/messenger", element: <Messenger /> }
     ]
   },
 
+  // Rutas del admin
   {
     path: "/",
-    element: <UserAdmin />,
+    element: <Admin />,
     children: [
-      { path: "/verificationUser", element: <CuentasUser /> },
-      { path: "/categoriasUser", element: <Category /> },
-      { path: "/chatsUser", element: <ChatsUser /> },
+      { path: "/home-admin", element: <HomeAdmin /> },
+      { path: "/category-admin", element: <CategoryAdmin /> },
+      { path: "/chat-admin", element: <ChatsAdmin /> },
     ]
   },
 
@@ -70,7 +86,6 @@ const router = createBrowserRouter([
   { path: "/terms", element: <TermsAndConditions /> },
   { path: "/privacy", element: <PrivacyPolicy /> },
 
-  { path: "*", element: <NotFound /> }
 ]);
 
 

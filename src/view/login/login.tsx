@@ -12,7 +12,7 @@ import User from "../../validation/login/user";
 
 function Login() {
 
-    authRedirectToken("/explorar");
+    authRedirectToken("/");
 
     const { email, setEmail, password, setPassword, showPassword, togglePasswordVisibility } = User();
 
