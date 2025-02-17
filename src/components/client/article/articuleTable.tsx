@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { handleGetUsername } from "../../../validation/client/article/handleGet";
+import { handleGetUserEmail } from "../../../validation/client/article/handleGet";
 import { Modal } from "../../tsx/toast";
 import { handleDelete } from "../../../validation/client/article/handleDelete";
 
@@ -11,7 +11,7 @@ function ArticleTable({
   toggleModalImagen: () => void;
 }) {
   useEffect(() => {
-    handleGetUsername()
+    handleGetUserEmail()
       .then((data) => {
         setArticulos(data);
       })

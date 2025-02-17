@@ -43,6 +43,7 @@ function Article() {
     setEstado("");
     setImagen(null);
     setIsOpen(!isOpen);
+    localStorage.removeItem("articuloSeleccionado");
   };
 
   const toggleModalAct = () => {

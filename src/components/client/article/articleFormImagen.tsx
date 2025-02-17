@@ -121,7 +121,7 @@ function ArticleFormImage({ toggleModalImagen }: any) {
                             />
                             <Message />
                             <button
-                                className="w-full bg-orange-600 hover:bg-orange-700 text-white py-2 px-4 rounded-lg"
+                                className="w-full bg-orange-400 hover:bg-orange-500 text-white py-2 px-4 rounded-lg"
                                 onClick={handleUpdateImage}
                             >
                                 Actualizar Imagen

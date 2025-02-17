@@ -1,5 +1,6 @@
 import axios from "axios";
 import { linkBackend } from "../../../components/ts/urls";
+import { getUserEmailFromToken } from "../../../components/ts/getEmailtoken";
 
 export const handleDelete = async (articulo_id: number): Promise<void> => {
   const userSession = localStorage.getItem("USER_SESSION");
@@ -23,11 +24,8 @@ export const handleDelete = async (articulo_id: number): Promise<void> => {
   }
 };
 
-export const handleDeleteFav = async (articulo_id: number): Promise<void> => {
-  const userSession = localStorage.getItem("USER_SESSION");
-  const parsedSession = userSession ? JSON.parse(userSession) : null;
-  const user_id = parsedSession?.id;
-
+export const handleDeleteFav = async (articulo_name: string): Promise<void> => {
+  const email_user = getUserEmailFromToken();
   const headers = {
     Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
   };
@@ -35,7 +33,7 @@ export const handleDeleteFav = async (articulo_id: number): Promise<void> => {
   try {
     await axios.delete(`${linkBackend}/favorito`, {
       headers,
-      params: { articulo_id, user_id },
+      params: { articulo_name, email_user },
     });
   } catch (error: any) {
     alert(error.response?.data?.message);

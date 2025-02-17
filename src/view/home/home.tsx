@@ -11,6 +11,7 @@ import ArticleFormImage from "../../components/client/article/articleFormImagen"
 import { handleDeleteFav } from "../../validation/client/favorite/handleDelete";
 import { handleFavorito } from "../../validation/client/favorite/Submit";
 import Footer from "../../components/home/footer";
+import { ThumbsUp, ThumbsDown } from "lucide-react";
 
 interface Articulo {
   id: number;
@@ -22,17 +23,17 @@ interface Articulo {
   email: string;
   name: string;
   user: {
-    id: number;
     name: string;
   };
 }
 
 function Home() {
   const navigate = useNavigate();
+
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [articulos, setArticulos] = useState<Articulo[]>([]);
-  const [favoritoIds, setFavoritoIds] = useState<number[]>([]);
+  const [favoritoIds, setFavoritoIds] = useState<string[]>([]);
   const [isOpenImg, setIsOpenImg] = useState(false);
 
   useEffect(() => {
@@ -55,9 +56,9 @@ function Home() {
 
     handleGetFavorito()
       .then((data: any[]) => {
-        setFavoritoIds(data.map((fav) => fav.articulo.id));
+        setFavoritoIds(data.map((fav) => fav.articulo.nombre));
       })
-      .catch((error:any) => {
+      .catch((error: any) => {
         console.error("Error al obtener los favoritos:", error);
       });
   }, []);
@@ -71,16 +72,12 @@ function Home() {
     toggleModalImagen();
   };
 
-  const IdCuentas = (id: number) => {
-    navigate(`/cuentas/${id}`);
-  };
-
   const filteredArticulos = articulos.filter((articulo) =>
     articulo.nombre.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
-    <div>
+    <div className="font-quicksand">
       {isAuthenticated ? <HeaderSesion /> : <Header />}
       <AutoSlider />
       <div className="bg-gradient-to-r from-gray-900 via-black to-gray-900 flex flex-col justify-between h-auto p-4 rounded-lg mt-14 shadow-md">
@@ -102,18 +99,18 @@ function Home() {
           <div className="mt-10 flex flex-col items-center justify-center h-64 text-center">
             <h2 className="text-2xl font-bold text-white mb-4">No hay artículos disponibles</h2>
             <p className="text-gray-400 mb-6">Por el momento no hay artículos para mostrar. Intenta más tarde.</p>
-            <img src="https://via.placeholder.com/200x200?text=Sin+Articulos" alt="Sin artículos" className="rounded w-48 h-48 object-cover" />
+            <img src="https://img.freepik.com/vector-premium/error-404-pagina-no-encontrada-icono-concepto-vectorial-sitio-web-internet-inactivo-diseno-plano-simple_570429-4168.jpg" alt="Sin artículos" className="rounded w-48 h-48 object-cover" />
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 p-4">
             {filteredArticulos.map((articulo) => (
-              <div key={articulo.id} className="max-w-sm border bg-gray-800 border-gray-700 rounded-lg shadow">
+              <div key={articulo.nombre} className="max-w-sm border bg-gray-800 border-gray-700 rounded-lg shadow">
                 <a href="#">
                   <img className="rounded-t-lg w-full h-48 object-cover" src={articulo.imagen || "https://via.placeholder.com/150"} alt={articulo.nombre} onClick={() => handleImagen(articulo.imagen)} />
                 </a>
                 <div className="p-5">
                   <div className="flex justify-center mb-3">
-                    <a href="#" onClick={(e) => { e.preventDefault(); IdCuentas(articulo.user.id); }}>
+                    <a href="#">
                       <span className="text-sm font-semibold text-orange-400 cursor-pointer">{articulo.user.name}</span>
                     </a>
                   </div>
@@ -128,21 +125,40 @@ function Home() {
                     {articulo.descripcion.length > 100 ? `${articulo.descripcion.substring(0, 100)}...` : articulo.descripcion}
                   </p>
                   <a href="#" onClick={async (e) => {
+
                     e.preventDefault();
-                    const isFavorito = favoritoIds.includes(articulo.id);
+                    const isFavorito = favoritoIds.includes(articulo.nombre);
+
                     try {
+
                       if (isFavorito) {
-                        await handleDeleteFav(articulo.id);
-                        setFavoritoIds(favoritoIds.filter((id) => id !== articulo.id));
+                        // await handleDeleteFav(articulo.nombre);
+                        // setFavoritoIds(favoritoIds.filter((id) => id !== articulo.id));
                       } else {
-                        const addedArticuloId = await handleFavorito(articulo.id, navigate);
-                        setFavoritoIds([...favoritoIds, addedArticuloId]);
+                        const addedArticuloId = await handleFavorito(articulo.nombre, navigate);
+                        setFavoritoIds([...favoritoIds, addedArticuloId.toString()]);
                       }
+
                     } catch (error) {
                       console.error("Error al actualizar favorito:", error);
                     }
                   }}>
-                    <img alt="Favorito" className="w-10 h-10 object-cover cursor-pointer mx-auto transition-transform transform hover:scale-110" />
+                    <button
+                      className={`w-32 py-2 flex items-center justify-center gap-2 text-white font-bold rounded-lg transition-transform transform hover:scale-110 ${favoritoIds.includes(articulo.nombre) ? "bg-orange-500" : "bg-orange-500"
+                        }`}
+                    >
+                      {favoritoIds.includes(articulo.nombre) ? (
+                        <>
+                          Desmatch
+                          <ThumbsDown size={20} />
+                        </>
+                      ) : (
+                        <>
+                          Match
+                          <ThumbsUp size={20} />
+                        </>
+                      )}
+                    </button>
                   </a>
                 </div>
               </div>

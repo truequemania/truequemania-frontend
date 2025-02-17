@@ -2,6 +2,7 @@ import { FormEvent } from "react";
 import axios, { AxiosResponse } from "axios";
 import { mostrarMensaje } from "../../../components/tsx/toast";
 import { linkBackend } from "../../../components/ts/urls";
+import { getUserEmailFromToken } from "../../../components/ts/getEmailtoken";
 
 interface CampanaResponse {
   message: string;
@@ -45,7 +46,6 @@ export const handleSubmit = async (
     return null;
   }
 
-  // 🔥 Obtener el token dentro de la función para asegurar que sea el más reciente
   const token = localStorage.getItem("ACCESS_TOKEN");
 
   if (!token) {
@@ -53,8 +53,7 @@ export const handleSubmit = async (
     return null;
   }
   
-  const userSession = localStorage.getItem("USER_SESSION");
-  const user_id = userSession ? JSON.parse(userSession).id : null;
+  const email = getUserEmailFromToken();
 
   const headers = {
     Authorization: `Bearer ${token}`,
@@ -71,7 +70,7 @@ export const handleSubmit = async (
       formData.append("estado", estado);
       if (imagen) formData.append("imagen", imagen);
       formData.append("descripcion", descripcion);
-      if (user_id) formData.append("user_id", user_id);
+      if (email) formData.append("email_user", email);
 
       response = await axios.post(`${linkBackend}/articulos`, formData, { headers });
     } else {
@@ -80,7 +79,7 @@ export const handleSubmit = async (
         categoria,
         estado,
         descripcion,
-        user_id,
+        email
       };
 
       response = await axios.patch(`${linkBackend}/articulos/${id}`, updateData, {

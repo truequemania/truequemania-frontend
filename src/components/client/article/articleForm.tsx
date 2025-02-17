@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import User from "../../../validation/client/article/user";
 import Handle from "../../../validation/client/article/handle";
-import { handleGet } from "../../../validation/client/article/handleGet";
 import Message from "../../tsx/message";
+import { handleGet } from "../../../validation/admin/category/handleGet";
 
 function ArticleForm({ toggleModal }: any) {
   const {
@@ -195,7 +195,7 @@ function ArticleForm({ toggleModal }: any) {
               <div>
                 <button
                   type="submit"
-                  className="mb-10 mt-5 w-full text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                  className="mb-10 mt-5 w-full text-white bg-orange-400 hover:bg-orange-500 focus:ring-4 focus:outline-none focus:ring-oragen-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                   disabled={isLoading}
                 >
                   {isLoading ? "Agregando..." : "Agregar"}

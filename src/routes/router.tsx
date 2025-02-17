@@ -19,7 +19,6 @@ import CategoryAdmin from "../view/admin/category/categoryAdmin";
 import ChatsAdmin from "../view/admin/chat/chatAdmin";
 
 // Archivos client
-import Client from "../components/client/client";
 import Article from "../view/client/article/article";
 import Favorite from "../view/client/favorite/favorite";
 import Exchange from "../view/client/exchange/exchange";
@@ -36,6 +35,7 @@ import PaymentMethods from "../view/payments/payments";
 import TermsAndConditions from "../view/terms/terms";
 import PrivacyPolicy from "../view/privacy/privacy";
 import Accounts from "../view/client/accounts/accounts";
+import Client from "../components/client/client";
 
 const router = createBrowserRouter([
 
@@ -57,7 +57,7 @@ const router = createBrowserRouter([
     element: <Client />,
     children: [
       { path: "/article", element: <Article /> },
-      // { path: "/favorite", element: <Favorite /> },
+      { path: "/favorite", element: <Favorite /> },
       // { path: "/chat", element: <Chats /> },
       // { path: "/exchange", element: <Exchange /> },
       // { path: "/accounts/:id", element: <Accounts /> },

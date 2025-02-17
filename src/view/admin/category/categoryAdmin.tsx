@@ -14,6 +14,7 @@ function CategoryAdmin() {
     setNombre("");
     setDescripcion("");
     setIsOpen(!isOpen);
+    localStorage.removeItem("categoriaSeleccionado");
   };
 
   const toggleModalAct = () => {
@@ -21,6 +22,7 @@ function CategoryAdmin() {
     setNombre("");
     setDescripcion("");
     setIsOpen(!isOpen);
+    localStorage.removeItem("categoriaSeleccionado");
   };
 
   return (

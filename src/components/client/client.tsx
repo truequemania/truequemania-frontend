@@ -3,79 +3,57 @@ import { useEffect, useState } from "react";
 import { Modal } from "../tsx/toast";
 import NavBarUser from "../tsx/navBarUser";
 import SidebarUser from "../tsx/asideUser";
+import roleAdmin from "../ts/roleAdmin";
+import authRedirectNoToken from "../ts/autRedirectNoToken";
+import Footer from "../admin/footer";
 
 function Client() {
-  const [isAsideOpen, setIsAsideOpen] = useState(false);
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isLogged, setIsLogged] = useState(false);
+
+  authRedirectNoToken("/login");
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("ACCESS_TOKEN");
-    setIsLogged(!!token);
-  }, []);
+    roleAdmin(navigate);
+  }, [navigate]);
+
+  const [isAsideOpen, setIsAsideOpen] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => setIsModalVisible(!isModalVisible);
   const toggleAside = () => setIsAsideOpen(!isAsideOpen);
 
   const logOut = () => {
     localStorage.removeItem("ACCESS_TOKEN");
-    localStorage.removeItem("USER_SESSION");
-    setIsLogged(false);
     navigate("/");
   };
 
   const handleNavigation = (path: string) => {
-    if (!isLogged) {
-      navigate("/login");
-    } else {
-      if (path === "/perfil") {
-        const userSession = localStorage.getItem("USER_SESSION");
-        let userName = "Usuario";
-        if (userSession) {
-          try {
-            const parsedSession = JSON.parse(userSession);
-            userName = parsedSession.name || "Usuario";
-          } catch (error) {
-            console.error("Error al parsear USER_SESSION:", error);
-          }
-        }
-        navigate(path, { state: { name: userName } });
-      } else {
-        navigate(path);
-      }
-      setIsAsideOpen(false);
-    }
+    navigate(path);
+    setIsAsideOpen(false);
   };
 
-  const userSession = localStorage.getItem("USER_SESSION");
-  const parsedSession = userSession ? JSON.parse(userSession) : null;
-  const user_id = parsedSession?.id;
-
   const navLinks = [
-    { path: "/explorar", label: "Explorador" },
-    { path: "/articulos", label: "Artículos" },
-    { path: "/favoritos", label: "Favoritos" },
+    { path: "/article", label: "Artículos" },
+    { path: "/favorite", label: "Favoritos" },
     { path: "/chats", label: "Chats" },
-    { path: "/intercambios", label: "Intercambios" },
-    { path: `/cuentas/${user_id}`, label: "Cuentas" },
+    { path: "/exchange", label: "Intercambios" },
   ];
 
   return (
-    <>
+    <div className="font-quicksand ">
       <NavBarUser toggleAside={toggleAside} />
       <SidebarUser
         isAsideOpen={isAsideOpen}
         handleNavigation={handleNavigation}
         navLinks={navLinks}
         showModal={showModal}
-        isLogged={isLogged}
       />
-      <div
-        className={`transition-all mt-16 ${isAsideOpen ? "lg:ml-64" : "ml-0"}`}
-      >
-        <Outlet />
+      <div className={`flex-1 transition-all ${isAsideOpen ? "lg:ml-64" : "ml-0"} flex flex-col`}>
+        <div className="flex-1 p-4">
+          <Outlet />
+        </div>
+        <Footer />
       </div>
       <Modal
         onConfirm={() => {
@@ -86,7 +64,7 @@ function Client() {
         onClose={showModal}
         message="¿Estás seguro de cerrar sesión?"
       />
-    </>
+    </div>
   );
 }
 

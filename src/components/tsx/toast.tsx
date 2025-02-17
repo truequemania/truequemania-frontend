@@ -24,8 +24,8 @@ export function mostrarMensaje(mensaje: string, elemento: HTMLElement | null) {
     if (!isVisible) return null;
   
     return (
-      <div className="bg-gray-100 bg-opacity-70 fixed inset-0 flex justify-center items-center z-50">
-        <div id="popup-modal" className="relative rounded-lg shadow bg-gradient-to-r from-gray-900 via-black to-gray-900">
+      <div className="bg-gray-100 bg-opacity-40 fixed inset-0 flex justify-center items-center z-50">
+        <div id="popup-modal" className="relative rounded-lg shadow bg-gray-900">
           <button
             onClick={onClose}
             type="button"
