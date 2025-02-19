@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { handleGetUserId } from "../../../validation/favorito/handleGet";
 import { Modal } from "../../tsx/toast";
-import { handleDelete } from "../../../validation/favorito/handleDelete";
+import { handleGetFavorito } from "../../../validation/client/favorite/handleGet";
+import { handleDelete } from "../../../validation/client/favorite/handleDelete";
 
 function FavoritoTable({
   toggleModalImagen,
@@ -9,7 +9,7 @@ function FavoritoTable({
   toggleModalImagen: () => void;
 }) {
   useEffect(() => {
-    handleGetUserId()
+    handleGetFavorito()
       .then((data) => {
         setFavorito(data);
       })
@@ -31,10 +31,9 @@ function FavoritoTable({
     }[]
   >([]);
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const showModal = () => {
-    setIsModalVisible(!isModalVisible);
-  };
+  const [favoritoAEliminar, setFavoritoAEliminar] = useState<number | null>(
+    null
+  );
 
   const handleImagen = (imagen: string) => {
     const favorito = { imagen };
@@ -61,26 +60,16 @@ function FavoritoTable({
         <table className="w-full text-sm text-left text-gray-400">
           <thead className="text-xs text-gray-400 uppercase bg-gray-700">
             <tr>
-              <th scope="col" className="px-6 py-3">
-                Nombre
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Fecha
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Estado
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Imagen
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Acción
-              </th>
+              <th scope="col" className="px-6 py-3">Nombre</th>
+              <th scope="col" className="px-6 py-3">Fecha</th>
+              <th scope="col" className="px-6 py-3">Estado</th>
+              <th scope="col" className="px-6 py-3">Imagen</th>
+              <th scope="col" className="px-6 py-3">Acción</th>
             </tr>
           </thead>
           <tbody>
-            {favorito.map((fav, index) => (
-              <tr key={index} className="border-b bg-gray-900 border-gray-700">
+            {favorito.map((fav) => (
+              <tr key={fav.id} className="border-b bg-gray-900 border-gray-700">
                 <th
                   scope="row"
                   className="px-6 py-4 font-medium whitespace-nowrap text-white"
@@ -100,25 +89,28 @@ function FavoritoTable({
                 <td className="px-6 py-4">
                   <a
                     href="#"
-                    onClick={showModal}
+                    onClick={() => setFavoritoAEliminar(fav.articulo.id)}
                     className="ml-8 font-medium text-red-500 hover:underline"
                   >
                     Eliminar
                   </a>
-                  <Modal
-                    onConfirm={() => {
-                      handleDelete(fav.articulo.id);
-                      showModal();
-                    }}
-                    isVisible={isModalVisible}
-                    onClose={showModal}
-                    message="¿Estás seguro de sacer el artículo de favorito?"
-                  />
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+      )}
+
+      {favoritoAEliminar !== null && (
+        <Modal
+          onConfirm={() => {
+            handleDelete(favoritoAEliminar);
+            setFavoritoAEliminar(null);
+          }}
+          isVisible={favoritoAEliminar !== null}
+          onClose={() => setFavoritoAEliminar(null)}
+          message="¿Estás seguro de sacar el artículo de favorito?"
+        />
       )}
     </div>
   );

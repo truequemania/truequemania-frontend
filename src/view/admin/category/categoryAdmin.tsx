@@ -22,7 +22,6 @@ function CategoryAdmin() {
     setNombre("");
     setDescripcion("");
     setIsOpen(!isOpen);
-    localStorage.removeItem("categoriaSeleccionado");
   };
 
   return (

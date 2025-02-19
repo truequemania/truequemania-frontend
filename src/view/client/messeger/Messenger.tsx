@@ -34,7 +34,6 @@ function Messenger() {
   const [isConnected, setIsConnected] = useState(false);
   const [isChatActive, setIsChatActive] = useState(false);
   const [chats, setChats] = useState<Chat[]>([]);
-  console.log(chats);
   
   const [searchParams] = useSearchParams();
 

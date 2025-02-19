@@ -33,7 +33,7 @@ function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [articulos, setArticulos] = useState<Articulo[]>([]);
-  const [favoritoIds, setFavoritoIds] = useState<string[]>([]);
+  const [favoritoIds, setFavoritoIds] = useState<number[]>([]);
   const [isOpenImg, setIsOpenImg] = useState(false);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ function Home() {
 
   useEffect(() => {
     handleGet()
-      .then((data: Articulo[]) => {
+      .then((data) => {
         setArticulos(data);
       })
       .catch((error) => {
@@ -55,10 +55,10 @@ function Home() {
       });
 
     handleGetFavorito()
-      .then((data: any[]) => {
-        setFavoritoIds(data.map((fav) => fav.articulo.nombre));
+      .then((data) => {
+        setFavoritoIds(data.map((fav: any) => fav.articulo.id));
       })
-      .catch((error: any) => {
+      .catch((error) => {
         console.error("Error al obtener los favoritos:", error);
       });
   }, []);
@@ -124,30 +124,37 @@ function Home() {
                   <p className="mb-3 font-normal text-gray-400">
                     {articulo.descripcion.length > 100 ? `${articulo.descripcion.substring(0, 100)}...` : articulo.descripcion}
                   </p>
-                  <a href="#" onClick={async (e) => {
+                  <a
+                    href="#"
+                    onClick={async (e) => {
+                      e.preventDefault();
 
-                    e.preventDefault();
-                    const isFavorito = favoritoIds.includes(articulo.nombre);
+                      const isFavorito = favoritoIds.includes(articulo.id);
 
-                    try {
-
-                      if (isFavorito) {
-                        // await handleDeleteFav(articulo.nombre);
-                        // setFavoritoIds(favoritoIds.filter((id) => id !== articulo.id));
-                      } else {
-                        const addedArticuloId = await handleFavorito(articulo.nombre, navigate);
-                        setFavoritoIds([...favoritoIds, addedArticuloId.toString()]);
+                      try {
+                        if (isFavorito) {
+                          await handleDeleteFav(articulo.id);
+                          setFavoritoIds(
+                            favoritoIds.filter((id) => id !== articulo.id)
+                          );
+                        } else {
+                          console.log(articulo);
+                          const addedArticuloId = await handleFavorito(
+                            articulo.id,
+                            navigate
+                          );
+                          setFavoritoIds([...favoritoIds, addedArticuloId]);
+                        }
+                      } catch (error) {
+                        console.error("Error al actualizar favorito:", error);
                       }
-
-                    } catch (error) {
-                      console.error("Error al actualizar favorito:", error);
-                    }
-                  }}>
+                    }}
+                  >
                     <button
-                      className={`w-32 py-2 flex items-center justify-center gap-2 text-white font-bold rounded-lg transition-transform transform hover:scale-110 ${favoritoIds.includes(articulo.nombre) ? "bg-orange-500" : "bg-orange-500"
+                      className={`w-32 py-2 flex items-center justify-center gap-2 text-white font-bold rounded-lg transition-transform transform hover:scale-110 ${favoritoIds.includes(articulo.id) ? "bg-orange-500" : "bg-green-500"
                         }`}
                     >
-                      {favoritoIds.includes(articulo.nombre) ? (
+                      {favoritoIds.includes(articulo.id) ? (
                         <>
                           Desmatch
                           <ThumbsDown size={20} />

@@ -1,12 +1,14 @@
 import axios from "axios";
 import { linkBackend } from "../../../components/ts/urls";
-import { getUserEmailFromToken } from "../../../components/ts/getEmailtoken";
+import { getUserEmailFromToken } from "../../../components/ts/getEmailToken";
 
 export const handleDelete = async (articulo_id: number): Promise<void> => {
-  const userSession = localStorage.getItem("USER_SESSION");
-  const parsedSession = userSession ? JSON.parse(userSession) : null;
-  const user_id = parsedSession?.id;
 
+  const email_user = getUserEmailFromToken();
+
+  if (!email_user) {
+    throw new Error("No se encontró el email en el token.");
+  }
   const headers = {
     Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
   };
@@ -14,7 +16,7 @@ export const handleDelete = async (articulo_id: number): Promise<void> => {
   try {
     const response = await axios.delete(`${linkBackend}/favorito`, {
       headers,
-      params: { articulo_id, user_id },
+      params: { articulo_id, email_user },
     });
     alert(response.data.message);
     window.location.reload();
@@ -24,7 +26,7 @@ export const handleDelete = async (articulo_id: number): Promise<void> => {
   }
 };
 
-export const handleDeleteFav = async (articulo_name: string): Promise<void> => {
+export const handleDeleteFav = async (articulo_id: number): Promise<void> => {
   const email_user = getUserEmailFromToken();
   const headers = {
     Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
@@ -33,7 +35,7 @@ export const handleDeleteFav = async (articulo_name: string): Promise<void> => {
   try {
     await axios.delete(`${linkBackend}/favorito`, {
       headers,
-      params: { articulo_name, email_user },
+      params: { articulo_id, email_user },
     });
   } catch (error: any) {
     alert(error.response?.data?.message);

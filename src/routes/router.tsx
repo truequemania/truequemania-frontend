@@ -58,10 +58,11 @@ const router = createBrowserRouter([
     children: [
       { path: "/article", element: <Article /> },
       { path: "/favorite", element: <Favorite /> },
-      // { path: "/chat", element: <Chats /> },
+      { path: "/chats", element: <Chats /> },
+      { path: "/messenger", element: <Messenger /> }
       // { path: "/exchange", element: <Exchange /> },
       // { path: "/accounts/:id", element: <Accounts /> },
-      // { path: "/messenger", element: <Messenger /> }
+     
     ]
   },
 

@@ -1,16 +1,15 @@
 import axios from "axios";
 import { NavigateFunction } from "react-router-dom";
 import { linkBackend } from "../../../components/ts/urls";
-import { getUserEmailFromToken } from "../../../components/ts/getEmailtoken";
+import { getUserEmailFromToken } from "../../../components/ts/getEmailToken";
 
 export const handleFavorito = async (
-  articulo_name: string,
-  navigate: NavigateFunction 
+  articulo_id: number,
+  navigate: NavigateFunction
 ): Promise<number> => {
   const email_user = getUserEmailFromToken();
-  console.log(articulo_name, "2");
-
-  if (!articulo_name || !email_user) {
+  console.log(articulo_id, "data");
+  if (!articulo_id || !email_user) {
     alert("Faltan datos para hacer el match");
     throw new Error("Faltan datos");
   }
@@ -22,15 +21,15 @@ export const handleFavorito = async (
   try {
     const response = await axios.post(
       `${linkBackend}/favorito`,
-      { articulo_name, email_user },
+      { articulo_id, email_user },
       { headers }
     );
 
     alert(response.data.message);
 
-    // if (response.data.match === "match") {
-    //   navigate("/chats"); 
-    // }
+    if (response.data.match === "match") {
+      navigate("/chats");
+    }
 
     return response.data.articulo_id;
   } catch (error: any) {

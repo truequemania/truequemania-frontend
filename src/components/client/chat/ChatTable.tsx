@@ -4,6 +4,7 @@ import { linkBackend, linkFrontend } from "../../ts/urls";
 import { handleGetUserId } from "../../../validation/client/chat/handleGet";
 import ChatForm from "./ChatForm";
 import { handleGetUserIntercambios } from "../../../validation/client/exchange/handleGet";
+import { getUserIdFromToken } from "../../ts/getEmailToken";
 
 type Chat = {
   id: number;
@@ -40,9 +41,8 @@ function ChatTable() {
     intercambioId?: number;
   } | null>(null);
 
-  const userSession = localStorage.getItem("USER_SESSION");
-  const parsedSession = userSession ? JSON.parse(userSession) : null;
-  const currentUserId = parsedSession?.id;
+  const currentUserId = getUserIdFromToken();
+  console.log(currentUserId, "2");
 
   useEffect(() => {
     handleGetUserId()
@@ -190,11 +190,10 @@ function ChatTable() {
                   </td>
                   <td className="px-6 py-4">
                     <a
-                      href={`${linkFrontend}/messenger?userId=${currentUserId}&receiverId=${
-                        chat.userOne.id === currentUserId
+                      href={`${linkFrontend}/messenger?userId=${currentUserId}&receiverId=${chat.userOne.id === currentUserId
                           ? chat.userTwo.id
                           : chat.userOne.id
-                      }&chatId=${chat.id}&nameChat=${chat.nameChange}`}
+                        }&chatId=${chat.id}&nameChat=${chat.nameChange}`}
                       className="ml-8 font-medium text-blue-500 hover:underline"
                     >
                       Enviar mensaje
@@ -202,13 +201,12 @@ function ChatTable() {
                   </td>
                   <td className="px-6 py-4">
                     <button
-                      className={`ml-8 font-medium hover:underline ${
-                        buttonText === "Cerrar intercambio"
+                      className={`ml-8 font-medium hover:underline ${buttonText === "Cerrar intercambio"
                           ? "text-red-500"
                           : buttonText === "Cerrando ..."
-                          ? "text-orange-500"
-                          : "text-green-500"
-                      }`}
+                            ? "text-orange-500"
+                            : "text-green-500"
+                        }`}
                       onClick={() => {
                         const intercambio = intercambios.find(
                           (int) =>
@@ -245,7 +243,7 @@ function ChatTable() {
           userOneId={selectedChat.chat.userOne.id}
           userTwoId={selectedChat.chat.userTwo.id}
           isUpdating={selectedChat.isUpdating}
-          intercambioId={selectedChat.intercambioId} 
+          intercambioId={selectedChat.intercambioId}
         />
       )}
     </div>

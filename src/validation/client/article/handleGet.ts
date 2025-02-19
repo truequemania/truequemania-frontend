@@ -1,6 +1,6 @@
 import axios from "axios";
 import { linkBackend } from "../../../components/ts/urls";
-import { getUserEmailFromToken } from "../../../components/ts/getEmailtoken";
+import { getUserEmailFromToken } from "../../../components/ts/getEmailToken";
 
 export async function handleGet() {
     try {
